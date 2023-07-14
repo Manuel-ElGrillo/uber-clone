@@ -1,15 +1,16 @@
 // import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
+import { SafeAreaProvider } from 'react-native-safe-area-context'; //For icons...
 import { store } from './store';
+import Home from './screens/Home';
 
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text>{'Consrtruyendo otra App en React Native >:D'}</Text>
-        {/* <StatusBar style="auto" /> */}
-      </View>
+      <SafeAreaProvider>
+        <Home />
+      </SafeAreaProvider>
     </Provider> 
   );
 }
