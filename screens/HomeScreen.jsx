@@ -2,12 +2,13 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image } from 'react-native'
 import tw from 'tailwind-react-native-classnames' //Check package.json dependencies to see how to install Tailwind :D
 import NavOptions from '../components/NavOptions'
+import Favorites from '../components/Favorites'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { API_KEY } from '@env'
 import { useDispatch } from 'react-redux'
 import { setDestination, setOrigin } from '../slices/navSlice' // The actions :D
 
-const Home = () => {
+const HomeScreen = () => {
 
     const dispatch = useDispatch()
 
@@ -27,7 +28,7 @@ const Home = () => {
 
                 <GooglePlacesAutocomplete 
                     nearbyPlacesAPI='GooglePlacesSearch' //which API to use for current location
-                    debounce={400} //delay time
+                    debounce={200} //delay time
                     placeholder='Begin your journey or order some food'
                     enablePoweredByContainer={false} //Disable the 'powered by Google ad'
                     query={{
@@ -58,12 +59,15 @@ const Home = () => {
                 />
 
                 <NavOptions />
+
+                <Favorites />
+
             </View>
         </SafeAreaView>
     )
 }
 
-export default Home
+export default HomeScreen
 
 const styles = StyleSheet.create({
     mainContainer: {

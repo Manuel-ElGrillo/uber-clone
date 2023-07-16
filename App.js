@@ -5,8 +5,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'; //For icons..
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { store } from './store';
-import Home from './screens/Home';
-import Map from './screens/Map';
+import HomeScreen from './screens/HomeScreen';
+import MapScreen from './screens/MapScreen';
 
 
 export default function App() {
@@ -19,14 +19,14 @@ export default function App() {
         <SafeAreaProvider>
           <Stack.Navigator>
             <Stack.Screen 
-              name='Home'
-              component={Home}
+              name='HomeScreen'
+              component={HomeScreen}
               options={{ //Styles for navigation
                 headerShown: false, 
               }}/>
             <Stack.Screen 
-              name='Map'
-              component={Map}
+              name='MapScreen'
+              component={MapScreen}
               options={{
                 headerShown: false, 
               }}/>
