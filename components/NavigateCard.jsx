@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tw from 'tailwind-react-native-classnames'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
@@ -7,6 +7,7 @@ import { setDestination } from '../slices/navSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import Favorites from '../components/Favorites'
+import { Icon } from 'react-native-elements'
 
 const NavigateCard = () => {
 
@@ -59,6 +60,30 @@ const NavigateCard = () => {
                 </View>
 
                 <Favorites />
+
+            </View>
+
+            <View style={tw`flex-row justify-evenly bg-white py-2 border-t border-blue-100`}>
+
+                <TouchableOpacity 
+                    style={tw`flex flex-row justify-between bg-gray-300 w-24 px-4 py-3 rounded-full`}
+                    onPress={() => navigation.navigate('CarOptionsCard')}>
+                        <Icon
+                            name='car'
+                            type='font-awesome'
+                            color={'black'}
+                            size={16}/>
+                        <Text style={tw`text-black text-center`}>Rides</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={tw`flex flex-row justify-between bg-gray-300 w-24 px-4 py-3 rounded-full`}>
+                        <Icon
+                            name='fast-food-outline'
+                            type='ionicon'
+                            color={'black'}
+                            size={16}/>
+                        <Text style={tw`text-black text-center`}>Rides</Text>
+                </TouchableOpacity>
 
             </View>
 
