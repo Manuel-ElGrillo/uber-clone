@@ -1,3 +1,4 @@
+// 344
 // import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { Provider } from 'react-redux';
