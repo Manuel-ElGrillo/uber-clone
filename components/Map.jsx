@@ -2,8 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import MapView, { Marker } from 'react-native-maps'
 import tw from 'tailwind-react-native-classnames'
-import { useSelector } from 'react-redux'
-import { selectDestination, selectOrigin } from '../slices/navSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectDestination, selectOrigin, setTravelTimeInformation } from '../slices/navSlice'
 import MapViewDirections from 'react-native-maps-directions'
 import { API_KEY } from '@env'
 
@@ -14,6 +14,7 @@ const Map = () => {
     //Getting the selector destination (Point B)
     const destination = useSelector(selectDestination)
     const mapRef = useRef(null)
+    const dispatch = useDispatch()
 
     //Making a zoom out from Point A to Point B
     useEffect( () => {
@@ -30,6 +31,27 @@ const Map = () => {
         }) 
 
     }, [origin, destination])
+
+    //Calculating Travel Time
+    useEffect( () => {
+
+        //Doing nothing if there are no origin or destination
+        if ( !origin || !destination) return
+
+        const URL = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin.description}&destinations=${destination.description}&key=${API_KEY}`
+
+        const getTravelTIme = async () => {
+            fetch(URL).
+                then( (response) => response.json() ).
+                    then( data => {
+                        console.log(data)
+                        dispatch(setTravelTimeInformation(data.rows[0].elements[0])) //Storing da travelTime (see CarOptionsCards component at line 13)
+                    } )
+        }
+
+        getTravelTIme()
+
+    }, [origin, destination, API_KEY])
 
     return (
         <MapView

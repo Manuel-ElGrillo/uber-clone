@@ -3,11 +3,14 @@ import React, { useState } from 'react'
 import tw from 'tailwind-react-native-classnames'
 import { Icon } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { selectTravelTimeInformation } from '../slices/navSlice'
 
 const CarOptionsCard = () => {
 
   const navigation = useNavigation()
   const [carSelected, setCarSelected] = useState(null)
+  const travelTimeInformation = useSelector(selectTravelTimeInformation) //getting the travel time info
 
   const carOptions = [
     {
@@ -30,6 +33,9 @@ const CarOptionsCard = () => {
     }
   ]
 
+  //Ficticious charge
+  const CHARGE = 1.5
+
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
 
@@ -43,7 +49,7 @@ const CarOptionsCard = () => {
               type='font-awesome'/>
         </TouchableOpacity>
 
-        <Text style={tw`text-center text-xl py-3`}>Select a Ride</Text>
+        <Text style={tw`text-center text-xl py-3`}>Select a Ride - {travelTimeInformation?.distance.text}</Text>
 
       </View>
 
@@ -57,7 +63,7 @@ const CarOptionsCard = () => {
         renderItem={ ({item}) => (
           <TouchableOpacity 
             onPress={() => setCarSelected(item)}
-            style={tw`flex-row items-center justify-between px-10 ${item.id === carSelected?.id && 'bg-blue-100'}`} 
+            style={tw`flex-row items-center justify-between px-5 ${item.id === carSelected?.id && 'bg-blue-100'}`} 
           >
             <Image
               style={{width: 100, height: 100, resizeMode: 'contain'}}
@@ -65,9 +71,19 @@ const CarOptionsCard = () => {
             />
             <View>
               <Text style={tw`font-semibold text-xl`}>Choose {item.title}</Text>
-              <Text>Travel time...</Text>
+              <Text>Travel time:</Text>
+              <Text>{travelTimeInformation?.duration.text}</Text>
             </View>
-            <Text style={tw`text-xl`}>$99</Text>
+            <Text style={tw`text-xl`}>
+              { //Using JS API and setting the price
+                new Intl.NumberFormat('es-UY', {
+                  style: 'currency',
+                  currency: 'UYU',
+                }).format(
+                  (travelTimeInformation?.duration.value * CHARGE * item.multiplier ) / 100
+                )
+              }
+            </Text>
           </TouchableOpacity>
         ) }
       />
