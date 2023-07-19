@@ -82,7 +82,7 @@ const NavigateCard = () => {
                             type='ionicon'
                             color={'black'}
                             size={16}/>
-                        <Text style={tw`text-black text-center`}>Rides</Text>
+                        <Text style={tw`text-black text-center`}>Eats</Text>
                 </TouchableOpacity>
 
             </View>
