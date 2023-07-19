@@ -49,7 +49,7 @@ const CarOptionsCard = () => {
               type='font-awesome'/>
         </TouchableOpacity>
 
-        <Text style={tw`text-center text-xl py-3`}>Select a Ride - {travelTimeInformation?.distance.text}</Text>
+        <Text style={tw`text-center text-xl py-3`}>Select a Ride - {travelTimeInformation?.distance?.text}</Text>
 
       </View>
 
@@ -72,7 +72,7 @@ const CarOptionsCard = () => {
             <View>
               <Text style={tw`font-semibold text-xl`}>Choose {item.title}</Text>
               <Text>Travel time:</Text>
-              <Text>{travelTimeInformation?.duration.text}</Text>
+              <Text>{travelTimeInformation?.duration?.text}</Text>
             </View>
             <Text style={tw`text-xl`}>
               { //Using JS API and setting the price

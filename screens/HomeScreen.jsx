@@ -7,6 +7,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { API_KEY } from '@env'
 import { useDispatch } from 'react-redux'
 import { setDestination, setOrigin } from '../slices/navSlice' // The actions :D
+import grillo from '../assets/grillo.png'
 
 const HomeScreen = () => {
 
@@ -23,7 +24,18 @@ const HomeScreen = () => {
                     }}
                     source={{
                         uri: "https://links.papareact.com/gzs",
-                    }} 
+                    }}
+                />
+
+                <Image 
+                    style={{
+                        width:50,
+                        height: 50,
+                        top: -75,
+                        left: 50,
+                        resizeMode: 'contain'
+                    }}
+                    source={grillo}
                 />
 
                 <GooglePlacesAutocomplete 
